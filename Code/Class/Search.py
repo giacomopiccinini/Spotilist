@@ -33,11 +33,17 @@ class Search:
 
         # Counter of search iterations
         self.iteration_counter = 0
+        
+        completion_bar = st.progress(0)
 
         while self.playlist_counter < self.n_results:
+            
+            completion_bar.progress(self.playlist_counter/self.n_results)
 
             # Search
             self.single_search()
+            
+        completion_bar.progress(1.0)
 
         # Restrict to desired number of results
         self.df = (

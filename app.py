@@ -88,7 +88,7 @@ curators_to_exclude = curators_to_exclude.split(",")
 curators_to_exclude = [curator.lstrip() for curator in curators_to_exclude]
 
 if query:
-    
+        
     # Initialise search class
     search = Search(n_results, spotify, query, curators_to_exclude, followers_cutoff)
 
