@@ -98,21 +98,26 @@ if query:
     if click:
 
         ###### RESULTS ######
+        
+        if st.session_state["search"].error:
+            
+            st.error("There was an error running the search. Please amend the parameters and try again.")
 
-        st.markdown("## Results")
+        else: 
+            st.markdown("## Results")
 
-        # Only select relevant fields
-        curated_df = st.session_state["search"].df[
-            ["PlaylistName", "Followers", "CuratorName", "CuratorFollowers"]
-        ]
+            # Only select relevant fields
+            curated_df = st.session_state["search"].df[
+                ["PlaylistName", "Followers", "CuratorName", "CuratorFollowers"]
+            ]
 
-        # Show results
-        st.dataframe(curated_df)
+            # Show results
+            st.dataframe(curated_df)
 
-        # Download CSV with results
-        st.download_button(
-            "Download playlists details CSV",
-            convert_df(curated_df),
-            f"playlists.csv",
-            "test/csv",
-        )
+            # Download CSV with results
+            st.download_button(
+                "Download playlists details CSV",
+                convert_df(curated_df),
+                f"playlists.csv",
+                "test/csv",
+            )

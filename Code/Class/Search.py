@@ -25,32 +25,37 @@ class Search:
         self.query = query
         self.curators_to_exclude = curators_to_exclude
         self.followers_cutoff = followers_cutoff
+        self.error=False
 
     def search(self):
 
-        # Counter of acceptable playlist
-        self.playlist_counter = 0
+        try:
+            # Counter of acceptable playlist
+            self.playlist_counter = 0
 
-        # Counter of search iterations
-        self.iteration_counter = 0
-        
-        completion_bar = st.progress(0)
-
-        while self.playlist_counter < self.n_results:
+            # Counter of search iterations
+            self.iteration_counter = 0
             
-            completion_bar.progress(self.playlist_counter/self.n_results)
+            completion_bar = st.progress(0)
 
-            # Search
-            self.single_search()
-            
-        completion_bar.progress(1.0)
+            while self.playlist_counter < self.n_results:
+                
+                completion_bar.progress(self.playlist_counter/self.n_results)
 
-        # Restrict to desired number of results
-        self.df = (
-            self.df.sort_values(by=["Followers"]).head(self.n_results).reset_index()
-        )
+                # Search
+                self.single_search()
+                
+            completion_bar.progress(1.0)
 
-        st.session_state["search"] = self
+            # Restrict to desired number of results
+            self.df = (
+                self.df.sort_values(by=["Followers"]).head(self.n_results).reset_index()
+            )
+
+            st.session_state["search"] = self
+        except:
+            self.error = True
+            st.session_state["search"] = self
 
     def single_search(self):
 
