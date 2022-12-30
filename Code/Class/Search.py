@@ -11,10 +11,11 @@ class Search:
         self.df = pd.DataFrame(
             columns=[
                 "PlaylistName",
+                "Followers",
                 "PlaylistID",
                 "CuratorName",
                 "CuratorID",
-                "Followers",
+                "CuratorFollowers",
             ]
         )
 
@@ -118,6 +119,15 @@ class Search:
 
         # Sort by followers
         new_df.sort_values(by=["Followers"], inplace=True)
+
+        # Find followers of the curator
+        curator_followers = [
+            self.spotify.user(curator_id)["followers"]["total"]
+            for curator_id in new_df["CuratorID"]
+        ]
+
+        # Write to df
+        new_df["CuratorFollowers"] = curator_followers
 
         # Concatenate
         self.df = pd.concat([self.df, new_df], ignore_index=True)
