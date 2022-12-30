@@ -87,30 +87,32 @@ followers_cutoff = st.number_input(label="Maximum number of followers", value=10
 curators_to_exclude = curators_to_exclude.split(",")
 curators_to_exclude = [curator.lstrip() for curator in curators_to_exclude]
 
-# Initialise search class
-search = Search(n_results, spotify, query, curators_to_exclude, followers_cutoff)
+if query:
+    
+    # Initialise search class
+    search = Search(n_results, spotify, query, curators_to_exclude, followers_cutoff)
 
-# Button for actually running search
-click = st.button(label="Run search", on_click=search.search)
+    # Button for actually running search
+    click = st.button(label="Run search", on_click=search.search)
 
-if click:
+    if click:
 
-    ###### RESULTS ######
+        ###### RESULTS ######
 
-    st.markdown("## Results")
+        st.markdown("## Results")
 
-    # Only select relevant fields
-    curated_df = st.session_state["search"].df[
-        ["PlaylistName", "Followers", "CuratorName", "CuratorFollowers"]
-    ]
+        # Only select relevant fields
+        curated_df = st.session_state["search"].df[
+            ["PlaylistName", "Followers", "CuratorName", "CuratorFollowers"]
+        ]
 
-    # Show results
-    st.dataframe(curated_df)
+        # Show results
+        st.dataframe(curated_df)
 
-    # Download CSV with results
-    st.download_button(
-        "Download playlists details CSV",
-        convert_df(curated_df),
-        f"playlists.csv",
-        "test/csv",
-    )
+        # Download CSV with results
+        st.download_button(
+            "Download playlists details CSV",
+            convert_df(curated_df),
+            f"playlists.csv",
+            "test/csv",
+        )
