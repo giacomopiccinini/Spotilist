@@ -16,3 +16,7 @@ In addition, you will have to enter the total number of playlists to be displaye
 This is to avoid considering curators who are too famous and whom you cannot reasonably address.
 
 Finally, you might want to exclude playlists whose least famous artist has more than a certain number of followers. To do so, adjust the the 'Maximum number of followers' parameter.
+
+## Deployment
+
+The app is currently deployed on **Streamlit**, and is accessible at https://giacomopiccinini-spotilist-app-d9om9j.streamlit.app/. Notice: it has definitely not been tested (carefully enough) yet, so I do expect lots of bugs. If you find any, please do get in touch with me!
