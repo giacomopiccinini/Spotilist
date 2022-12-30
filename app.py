@@ -1,10 +1,11 @@
 import streamlit as st
 import spotipy
-import pandas as pd
 
 from spotipy.oauth2 import SpotifyClientCredentials
 from dotenv import load_dotenv
+
 from Code.Class.Search import Search
+from Code.Utilities.download import convert_df
 
 
 ###### APP INFO AND LAYOUT ######
@@ -98,6 +99,18 @@ if click:
 
     st.markdown("## Results")
 
-    st.dataframe(
-        st.session_state["search"].df[["PlaylistName", "Followers", "CuratorName"]]
+    # Only select relevant fields
+    curated_df = st.session_state["search"].df[
+        ["PlaylistName", "Followers", "CuratorName", "CuratorFollowers"]
+    ]
+
+    # Show results
+    st.dataframe(curated_df)
+
+    # Download CSV with results
+    st.download_button(
+        "Download playlists details CSV",
+        convert_df(curated_df),
+        f"playlists.csv",
+        "test/csv",
     )
