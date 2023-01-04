@@ -19,4 +19,4 @@ Finally, you might want to exclude playlists whose least famous artist has more 
 
 ## Deployment
 
-The app is currently deployed on **Streamlit**, and is accessible at https://giacomopiccinini-spotilist-app-d9om9j.streamlit.app/. Notice: it has definitely not been tested (carefully enough) yet, so I do expect lots of bugs. If you find any, please do get in touch with me!
+The app is currently deployed on **Streamlit**, and is accessible at https://spotilist.streamlit.app/. Notice: it has definitely not been tested (carefully enough) yet, so I do expect lots of bugs. If you find any, please do get in touch with me!
